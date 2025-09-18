@@ -11,11 +11,11 @@ import yaml
 def generate_launch_description():
 
     awdbot_description_path = get_package_share_directory("awdbot_description")
-    awdbot_bringup_path = get_package_share_directory("awdbot_bringup")
+    #awdbot_bringup_path = get_package_share_directory("awdbot_bringup")
     awdbot_controller_path = get_package_share_directory("awdbot_controller")
-    motorctrl_path = get_package_share_directory("motorctrl")
+    #motorctrl_path = get_package_share_directory("motorctrl")
 
-    diffdrivectrl_config_path = os.path.join(motorctrl_path, "config", "diffdrivectrl.yaml")
+    diffdrivectrl_config_path = os.path.join(awdbot_controller_path, "config", "diffdrivectrl.yaml")
     # YAML laden
     with open(diffdrivectrl_config_path, 'r') as f:
         data = yaml.safe_load(f) or {}

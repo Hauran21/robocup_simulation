@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="wheel" params="name parent xyz rpy visual_rpy wheel_radius wheel_width">
+
+        <link name="${name}_mount">
+        </link>
+        
+        <joint name="${name}_mount_joint" type="fixed" >
+            <origin xyz="${xyz}" rpy="${rpy}" />
+            <parent link="${parent}"/>
+            <child link="${name}_mount" />
+        </joint>
+        
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="file://$(find awdbot_description)/meshes/wheel.dae" scale="0.001 0.001 0.001" />
+                </geometry>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
+                <geometry>
+                    <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="5.0" />
+                <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
+                <xacro:cylinder_inertia m="5.0" r="${wheel_radius}" h="${wheel_width}" />
+            </inertial>
+        </link>
+        
+        <joint name="${wheel_width}_joint" type="continuous">
+            <parent link="${wheel_width}_mount"/>
+            <child link="${wheel_width}"/>
+            <axis xyz="0 1 0"/>
+            <origin xyz="0 0 0"/>
+        </joint>
+
+    </xacro:macro>
+</robot>

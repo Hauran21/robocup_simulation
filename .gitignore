@@ -50,6 +50,6 @@ qtcreator-*
 # Catkin custom files
 CATKIN_IGNORE
 
-/src/log
-/src/install 
+/log
+/install 
 

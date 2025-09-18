@@ -18,15 +18,15 @@
   <xacro:property name="urdf_parameters" value="${xacro.load_yaml('$(find awdbot_description)/config/rcjrobot_params.yaml')}"/>
 
   <!-- Parse the parameters from the loaded configuration-array -->
-  <xacro:property name="wheel_radius" value="${urdf_parameters['wheel_radius']/1000}"/>
-  <xacro:property name="wheel_width" value="${urdf_parameters['wheel_width']/1000}"/>
-  <xacro:property name="wheel_mounting_offset_z" value="${urdf_parameters['wheel_mounting_offset_z']/1000}"/>
-  <xacro:property name="wheel_mounting_offset_x" value="${urdf_parameters['wheel_mounting_offset_x']/1000}"/>
-  <xacro:property name="wheel_clearance" value="${urdf_parameters['wheel_clearance']/1000}"/>
+  <xacro:property name="wheel_radius" value="${urdf_parameters['wheel_radius']}"/>
+  <xacro:property name="wheel_width" value="${urdf_parameters['wheel_width']}"/>
+  <xacro:property name="wheel_mounting_offset_z" value="${urdf_parameters['wheel_mounting_offset_z']}"/>
+  <xacro:property name="wheel_mounting_offset_x" value="${urdf_parameters['wheel_mounting_offset_x']}"/>
+  <xacro:property name="wheel_clearance" value="${urdf_parameters['wheel_clearance']}"/>
 
-  <xacro:property name="chassis_length" value="${urdf_parameters['chassis_length']/1000}"/>
-  <xacro:property name="chassis_width" value="${urdf_parameters['chassis_width']/1000}"/>
-  <xacro:property name="chassis_height" value="${urdf_parameters['chassis_height']/1000}"/>
+  <xacro:property name="chassis_length" value="${urdf_parameters['chassis_length']}"/>
+  <xacro:property name="chassis_width" value="${urdf_parameters['chassis_width']}"/>
+  <xacro:property name="chassis_height" value="${urdf_parameters['chassis_height']}"/>
 
   <!-- Constants -->
   <xacro:property name="MATH_PI" value="3.14159" />
@@ -44,7 +44,7 @@
   <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/wheels.urdf.xacro" />
 
   <!-- Add lidar -->
-  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/lidar.urdf.xacro" />
+  <!-- <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/lidar.urdf.xacro" /> -->
 
   <!-- Add tof -->
   <!-- <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/tof.urdf.xacro" /> -->

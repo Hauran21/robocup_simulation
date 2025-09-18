@@ -1,156 +1,46 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     
-    <!-- Add wheel_front_left_mount to base_link -->
-    <link name="wheel_front_left_mount">
-    </link>
+    <xacro:include filename="macros/wheels.xacro"/>
     
-    <joint name="wheel_front_left_mount_joint" type="fixed" >
-        <origin xyz="${wheel_mounting_offset_x} ${chassis_width / 2.0} ${- chassis_height / 2 + wheel_mounting_offset_z}" rpy="0 0 0" />
-        <parent link="base_link"/>
-        <child link="wheel_front_left_mount" />
-    </joint>
-    
-    <!-- Add wheel_front_left to wheel_front_left_mount -->
-    <link name="wheel_front_left">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find awdbot_description)/meshes/left_wheel.dae" scale="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <geometry>
-                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="5.0" />
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <xacro:cylinder_inertia m="5.0" r="${wheel_radius}" h="${wheel_width}" />
-        </inertial>
-    </link>
-    
-    <joint name="wheel_front_left_joint" type="continuous">
-        <parent link="wheel_front_left_mount"/>
-        <child link="wheel_front_left"/>
-        <axis xyz="0 1 0"/>
-        <origin xyz="0 0 0"/>
-    </joint>
+    <xacro:wheel 
+        name="wheel_front_left" 
+        parent="base_link" 
+        xyz="${wheel_mounting_offset_x} ${chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" 
+        rpy="0 0 0"
+        visual_rpy="0 0 0"
+        wheel_radius="${wheel_radius}"
+        wheel_width="${wheel_width}"
+    />
 
-    <!-- Add wheel_front_right_mount to base_link -->
-    <link name="wheel_front_right_mount">
-    </link>
-    
-    <joint name="wheel_front_right_mount_joint" type="fixed" >
-        <origin xyz="${wheel_mounting_offset_x} ${- chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" rpy="0 0 0" />
-        <parent link="base_link"/>
-        <child link="wheel_front_right_mount" />
-    </joint>
-    
-    <!-- Add wheel_front_right to wheel_front_right_mount -->
-    <link name="wheel_front_right">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find awdbot_description)/meshes/right_wheel.dae" scale="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <geometry>
-                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="5.0" />
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <xacro:cylinder_inertia m="5.0" r="${wheel_radius}" h="${wheel_width}" />
-        </inertial>
-    </link>
-    
-    <joint name="wheel_front_right_joint" type="continuous">
-        <parent link="wheel_front_right_mount"/>
-        <child link="wheel_front_right"/>
-        <axis xyz="0 1 0"/>
-        <origin xyz="0 0 0"/>
-    </joint>
+    <xacro:wheel 
+        name="wheel_front_right"
+        parent="base_link" 
+        xyz="${wheel_mounting_offset_x} ${-chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" 
+        rpy="0 0 0"
+        visual_rpy="0 0 0"
+        wheel_radius="${wheel_radius}"
+        wheel_width="${wheel_width}"
+    />
 
-    <!-- Add wheel_rear_left_mount to base_link -->
-    <link name="wheel_rear_left_mount">
-    </link>
-    
-    <joint name="wheel_rear_left_mount_joint" type="fixed" >
-        <origin xyz="${- wheel_mounting_offset_x} ${chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" rpy="0 0 0" />
-        <parent link="base_link"/>
-        <child link="wheel_rear_left_mount" />
-    </joint>
-    
-    <!-- Add wheel_rear_left to wheel_rear_left_mount -->
-    <link name="wheel_rear_left">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find awdbot_description)/meshes/left_wheel.dae" scale="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <geometry>
-                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="5.0" />
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <xacro:cylinder_inertia m="5.0" r="${wheel_radius}" h="${wheel_width}" />
-        </inertial>
-    </link>
-    
-    <joint name="wheel_rear_left_joint" type="continuous">
-        <parent link="wheel_rear_left_mount"/>
-        <child link="wheel_rear_left"/>
-        <axis xyz="0 1 0"/>
-        <origin xyz="0 0 0"/>
-    </joint>
+    <xacro:wheel
+        name="wheel_rear_left" 
+        parent="base_link" 
+        xyz="${-wheel_mounting_offset_x} ${chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" 
+        rpy="0 0 0"
+        visual_rpy="0 0 0"
+        wheel_radius="${wheel_radius}"
+        wheel_width="${wheel_width}"
+    />
 
-    <!-- Add wheel_rear_right_mount to base_link -->
-    <link name="wheel_rear_right_mount">
-    </link>
-    
-    <joint name="wheel_rear_right_mount_joint" type="fixed" >
-        <origin xyz="${- wheel_mounting_offset_x} ${- chassis_width / 2.0} ${- chassis_height / 2 + wheel_mounting_offset_z}" rpy="0 0 0" />
-        <parent link="base_link"/>
-        <child link="wheel_rear_right_mount" />
-    </joint>
-    
-    <!-- Add wheel_rear_right to wheel_rear_right_mount -->
-    <link name="wheel_rear_right">
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find awdbot_description)/meshes/right_wheel.dae" scale="0.001 0.001 0.001" />
-            </geometry>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <geometry>
-                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
-            </geometry>
-        </collision>
-        <inertial>
-            <mass value="5.0" />
-            <origin xyz="0 0 0" rpy="${MATH_PI/2} 0 0" />
-            <xacro:cylinder_inertia m="5.0" r="${wheel_radius}" h="${wheel_width}" />
-        </inertial>
-    </link>
-    
-    <joint name="wheel_rear_right_joint" type="continuous">
-        <parent link="wheel_rear_right_mount"/>
-        <child link="wheel_rear_right"/>
-        <axis xyz="0 1 0"/>
-        <origin xyz="0 0 0"/>
-    </joint>
+    <xacro:wheel 
+        name="wheel_rear_right"
+        parent="base_link" 
+        xyz="${-wheel_mounting_offset_x} ${-chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}"
+        rpy="0 0 0"
+        visual_rpy="0 0 0"
+        wheel_radius="${wheel_radius}"
+        wheel_width="${wheel_width}"
+    />
 
 </robot>
