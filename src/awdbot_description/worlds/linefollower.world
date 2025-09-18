@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="linefollower_world">
+    
+    <!-- Lichtquelle hinzufügen -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://track_ground</uri>
+    </include>
+    <include>
+      <uri>model://human_walk</uri>
+    </include>
+    
+    <gui>
+      <camera name="user_camera">
+        <pose>0.0 0.0 4.0 0.0 1.57 0.0</pose>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>

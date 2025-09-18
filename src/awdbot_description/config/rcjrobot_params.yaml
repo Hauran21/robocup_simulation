@@ -1,0 +1,12 @@
+# Parameters for the robot description
+# Unit: [mm] => wird aber in gazebo als meter genommen
+
+wheel_radius: 45.0 # mit gummi
+wheel_width: 13.2
+wheel_mounting_offset_z: 11.6 # von der Unterseite bis zur Radmitte
+wheel_mounting_offset_x: 48.0 # von der Mitte des Chassis bis zur Radmitte 
+wheel_clearance: 23.4
+
+chassis_length: 168.0
+chassis_width: 120.0
+chassis_height: 122.4

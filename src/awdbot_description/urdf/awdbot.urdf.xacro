@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="awd_robot">
+
+    <xacro:include filename="utils.urdf.xacro" />
+    <xacro:include filename="awdbot/awdbot_include.xacro" />
+
+    <!-- Start GZ or Ignition depending on ROS 2 Version -->
+    <xacro:arg name="is_ignition" default="true"/>
+
+    <!-- Load Simulated or Real Hardware Interfaces -->
+    <xacro:arg name="is_sim" default="true"/>
+
+    <xacro:arg name="port_name"  default="/dev/ttyACM0"/>
+    <xacro:arg name="baud_rate"  default="57600"/>
+
+    <xacro:arg name="dxl1_id" default="1"/>
+    <xacro:arg name="dxl2_id" default="2"/>
+    <xacro:arg name="dxl3_id" default="3"/>
+    <xacro:arg name="dxl4_id" default="4"/>
+
+    <!-- Include Gazebo Parameters -->
+    <xacro:include filename="$(find awdbot_description)/urdf/awdbot/awdbot_gazebo.xacro" />
+
+    <!-- Include ros2_control Plugins -->
+    <xacro:include filename="$(find awdbot_description)/urdf/awdbot/awdbot_ros2_control.xacro" />
+
+
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin rpy="0 0 0" xyz="0 0 ${chassis_height/2}" />
+    </joint>
+    
+    <link name="base_link">
+        <xacro:box_inertial name="base_link" m="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}" />
+        <collision name="chassis_collision">
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}" />
+            </geometry>
+        </collision>
+        <visual name="base_link_visual">
+            <origin xyz="0 0 0" rpy=" 0 0 0" />
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}" />
+            </geometry>
+            <material name="green"/>
+        </visual>
+    </link>
+    <link name="wheel_front_right">
+        <xacro:cylinder_inertial name="wheel_front_right" m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+        <collision name="wheel_FR_collision">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+        </collision>
+        <visual name="wheel_FR_visual">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    <link name="wheel_front_left">
+        <xacro:cylinder_inertial name="wheel_front_left" m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+        <collision name="wheel_FL_collision">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+        </collision>
+        <visual name="wheel_FL_visual">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    <link name="wheel_rear_right">
+        <xacro:cylinder_inertial name="wheel_rear_right" m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+        <collision name="wheel_RR_collision">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+        </collision>
+        <visual name="wheel_RR_visual">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    <link name="wheel_rear_left">
+        <xacro:cylinder_inertial name="wheel_rear_left" m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+        <collision name="wheel_RL_collision">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+        </collision>
+        <visual name="wheel_RL_visual">
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}" />
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+
+
+    <!-- <link name="camera_mount">
+        <pose>0 0 0 0.0 0.0 0.0</pose> 
+        <xacro:box_inertial name="camera_mount" m="0.1" x="0.01" y="0.01" z="0.01" />
+        <visual name="camera_mount_visual">
+            <geometry><box size="0.01 0.01 0.01" />
+            </geometry> 
+        </visual>
+        <collision name="camera_mount_collision">
+            <geometry><box size="0.01 0.01 0.01" />
+            </geometry> 
+        </collision>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="camera_mount" />
+        <origin xyz="${chassis_length/2} 0 ${chassis_height/2+camera_height/2}" rpy="0.0 0 0" />
+    </joint>
+
+    <joint name="camera_fixed" type="fixed">
+        <parent link="camera_mount" />
+        <child link="camera_link" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint> -->
+
+
+    <link name="camera_link">
+        <xacro:box_inertial name="camera_link" m="${camera_mass}" x="${camera_width}" y="${camera_length}" z="${camera_height}" />
+        <collision name="camera_link_collision">
+            <origin xyz="0 0 0" rpy=" 0 0 0" />
+            <geometry>
+                <box size="${camera_length} ${camera_width} ${camera_height}" />
+            </geometry>
+        </collision>
+        <visual name="camera_link_visual">
+            <origin xyz="0 0 0" rpy=" 0 0 0" />
+            <geometry>
+                <box size="${camera_length} ${camera_width} ${camera_height}" />
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+
+    <link name="base_scan">
+      <xacro:box_inertial name="base_scan" m="${lidar_mass}" x="${lidar_width}" y="${lidar_length}" z="${lidar_height}" />
+        <collision name="lidar_sensor_collision">
+            <origin xyz="0 0 ${-lidar_height/2+0.01}" rpy="0 0 0" />
+            <geometry>
+                <box size="${lidar_length} ${lidar_width} ${lidar_height}" />
+            </geometry>
+        </collision>
+        <visual name="lidar_sensor_visual">
+            <origin xyz="0 0 ${-lidar_height/2+0.01}" rpy="0 0 0" />
+            <geometry>
+                <box size="${lidar_length} ${lidar_width} ${lidar_height}" />
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="wheel_front_right_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="wheel_front_right" />
+        <origin xyz="${chassis_length/2-wheel_radius} -${chassis_width/2+wheel_width/2} 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <joint name="wheel_front_left_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="wheel_front_left" />
+        <origin xyz="${chassis_length/2-wheel_radius} ${chassis_width/2+wheel_width/2} 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <joint name="wheel_rear_right_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="wheel_rear_right" />
+        <origin xyz="-${chassis_length/2-wheel_radius} -${chassis_width/2+wheel_width/2} 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <joint name="wheel_rear_left_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="wheel_rear_left" />
+        <origin xyz="-${chassis_length/2-wheel_radius} ${chassis_width/2+wheel_width/2} 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="camera_link" />
+        <origin xyz="${chassis_length/2} 0 ${chassis_height/2+camera_height/2}" rpy="0.0 1.5 0.0"/>
+    </joint>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="base_scan"/>
+      <origin xyz="0 0 ${chassis_height/2 + lidar_height-0.01}" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- <xacro:include filename="awdbot_gazebo.xacro" /> -->
+</robot>

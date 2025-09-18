@@ -1,0 +1,98 @@
+#Richtigen Controllery aus dem Repository auswählen: 
+#LINK: https://github.com/ros-controls/ros2_controllers :
+# - ROS2 Branch auswählen
+# - Controller auswählen
+# - Plugin xml öffnen (z.B.: https://github.com/ros-controls/ros2_controllers/blob/humble/diff_drive_controller/diff_drive_plugin.xml) 
+#   und Klassennamen kopieren
+# - Kopierten Klassennamen hier als type einfügen
+# - Controller-Name individell anpassen (sinnvollerweise mit dem Namen des Controllers)
+controller_manager:
+  ros__parameters:
+    update_rate: 40 # Hz Globale Update-Rate für den Controller-Manager
+
+    diff_drive_controller:
+      # Realisierung der Inversen Kineamatik für einen Differentialantrieb
+      # Dieser Controller steuert die Geschwindigkeit der Räder, um die gewünschte
+      # Bewegung des Roboters zu erreichen.
+      # plus zusätzliche Realisierung der Odometrie
+      type: diff_drive_controller/DiffDriveController
+
+    joint_state_broadcaster:
+      # Kontroller, der die Gelenkzustände (Position, Geschwindigkeit, Beschleunigung)
+      # der Gelenke des Roboters veröffentlicht.
+      # Wird benötigt, damit die Gelenkzustände in der Simulation oder auf dem Roboter
+      # korrekt erfasst und verarbeitet werden können.
+      # Dazu wird Messtechnik an den Gelenken benötigt!
+      # In der Simulation wird dies durch die Gazebo-Plugins realisiert.
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    velocity_controllers:
+      # Unsere eigenen Umsetzung eines Differentialantriebs
+      type: velocity_controllers/JointGroupVelocityController
+
+
+# Hier werden die Parameter für die zuvor definierten Controller konfiguriert.
+diff_drive_controller:
+  ros__parameters:
+    type        : diff_drive_controller/DiffDriveController
+    use_stamped_vel: true
+    left_wheel_names  : ['wheel_front_left_joint', 'wheel_rear_left_joint']
+    right_wheel_names : ['wheel_front_right_joint', 'wheel_rear_right_joint']
+
+    publish_rate: 20.0               # default: 50
+    pose_covariance_diagonal : [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
+
+    wheel_separation : 0.18
+    wheel_radius : 0.04
+
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    # Velocity commands timeout [s], default 0.5
+    cmd_vel_timeout: 0.5
+
+    # Base frame_id
+    base_frame_id: base_footprint #default: base_link
+
+    # Publish limited velocity
+    publish_limited_velocity: true
+
+    # Publish wheel data
+    publish_wheel_data: true
+
+    # Publish to TF directly or not
+    enable_odom_tf: true
+
+    # Velocity and acceleration limits
+    # Whenever a min_* is unspecified, default to -max_*
+    linear:
+      x:
+        has_velocity_limits    : true
+        max_velocity           : 0.7  # m/s
+        min_velocity           : -0.7 # m/s
+        has_acceleration_limits: true
+        max_acceleration       : 0.7  # m/s^2
+        min_acceleration       : -0.7 # m/s^2
+        has_jerk_limits        : false
+        max_jerk               : 5.0  # m/s^3
+    angular:
+      z:
+        has_velocity_limits    : true
+        max_velocity           : 8.5  # rad/s
+        min_velocity           : -8.5  # rad/s
+        has_acceleration_limits: true
+        max_acceleration       : 5.0  # rad/s^2
+        min_acceleration       : -5.0   # rad/s^2
+        has_jerk_limits        : false
+        max_jerk               : 2.5  # rad/s^3
+
+
+velocity_controllers:
+  ros__parameters:
+    joints:
+      - wheel_front_left_joint
+      - wheel_front_right_joint
+      - wheel_rear_left_joint
+      - wheel_rear_right_joint

@@ -1,0 +1,13 @@
+material Gazebo/TrackTexture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture linefollower.png
+      }
+    }
+  }
+}

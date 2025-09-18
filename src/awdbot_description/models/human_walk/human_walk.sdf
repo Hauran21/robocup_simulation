@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name="human_walk">
+  <pose>-1 -0.85 0.21 0 0 0.75</pose>
+    <static>true</static>
+    <link name="link">
+      <visual name="human_visual">
+        <geometry>
+          <mesh>
+            <uri>model://human_walk/walk.dae</uri>
+            <scale>0.2 0.2 0.2</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="human_collision">
+        <geometry>
+          <mesh>
+            <uri>model://human_walk/walk.dae</uri>
+            <scale>0.2 0.2 0.2</scale>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

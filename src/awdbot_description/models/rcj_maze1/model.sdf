@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='rcj_maze1'>
+      <pose>0.30 -3.6 0.001 0 0 0</pose>
+      <static>true</static>
+      <link name='link'> 
+        <inertial> 
+          <pose>0 0 0 0 0 1.57</pose> 
+          <scale>1.0 1.0 1.0</scale> 
+        </inertial> 
+        <collision name='collision'> 
+          <geometry> 
+            <mesh> 
+              <scale>1.0 1.0 1.0</scale> 
+              <uri>model://rcj_maze1/rcj_maze1.dae</uri> 
+            </mesh> 
+          </geometry> 
+          <max_contacts>1000</max_contacts> 
+          <surface> 
+          </surface> 
+        </collision> 
+        <visual name='visual'> 
+          <geometry> 
+            <mesh> 
+              <scale>1.0 1.0 1.0</scale> 
+              <uri>model://rcj_maze1/rcj_maze1.dae</uri> 
+            </mesh> 
+          </geometry> 
+        </visual> 
+        <self_collide>0</self_collide> 
+        <inertial> 
+          <pose>0 0 0 0 -0 0</pose> 
+          <inertia> 
+          </inertia> 
+          <mass>1</mass> 
+        </inertial> 
+        <enable_wind>0</enable_wind> 
+        <kinematic>0</kinematic> 
+      </link> 
+  </model>
+</sdf>

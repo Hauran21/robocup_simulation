@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <!-- Start GZ or Ignition depending on ROS 2 Version -->
+  <xacro:arg name="is_ignition" default="true"/>
+
+  <!-- Load Simulated or Real Hardware Interfaces -->
+  <xacro:arg name="is_sim" default="true"/>
+
+  <!-- Include some scripts -->
+  <xacro:include filename="$(find awdbot_description)/urdf/utils.urdf.xacro" />
+
+  <!-- Load gazebo diffdrive plugin -->
+  <!-- <xacro:include filename="$(find awdbot_description)/urdf/includes/gazebo.urdf.xacro" /> -->
+
+  <!-- Load the parameters from the configuration file -->
+  <xacro:property name="urdf_parameters" value="${xacro.load_yaml('$(find awdbot_description)/config/rcjrobot_params.yaml')}"/>
+
+  <!-- Parse the parameters from the loaded configuration-array -->
+  <xacro:property name="wheel_radius" value="${urdf_parameters['wheel_radius']/1000}"/>
+  <xacro:property name="wheel_width" value="${urdf_parameters['wheel_width']/1000}"/>
+  <xacro:property name="wheel_mounting_offset_z" value="${urdf_parameters['wheel_mounting_offset_z']/1000}"/>
+  <xacro:property name="wheel_mounting_offset_x" value="${urdf_parameters['wheel_mounting_offset_x']/1000}"/>
+  <xacro:property name="wheel_clearance" value="${urdf_parameters['wheel_clearance']/1000}"/>
+
+  <xacro:property name="chassis_length" value="${urdf_parameters['chassis_length']/1000}"/>
+  <xacro:property name="chassis_width" value="${urdf_parameters['chassis_width']/1000}"/>
+  <xacro:property name="chassis_height" value="${urdf_parameters['chassis_height']/1000}"/>
+
+  <!-- Constants -->
+  <xacro:property name="MATH_PI" value="3.14159" />
+
+  <!-- Include Gazebo Parameters -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/gazebo.urdf.xacro" />
+
+  <!-- Include ros2_control Plugins -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/ros2_control.xacro" />
+
+  <!-- Add body -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/body.urdf.xacro"/>
+
+  <!-- Add wheels -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/wheels.urdf.xacro" />
+
+  <!-- Add lidar -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/lidar.urdf.xacro" />
+
+  <!-- Add tof -->
+  <!-- <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/tof.urdf.xacro" /> -->
+
+  <!-- Add camera -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/camera.urdf.xacro" />
+
+</robot>

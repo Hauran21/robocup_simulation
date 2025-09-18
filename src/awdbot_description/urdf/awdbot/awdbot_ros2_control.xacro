@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="awd_robot">
+
+    <ros2_control name="RobotSystem" type="system">
+
+        <!-- ros2_control Gazebo -->
+        <xacro:if value="$(arg is_sim)">
+            <!-- ROS 2 Humble -->
+            <xacro:if value="$(arg is_ignition)">
+                <hardware>
+                    <plugin>ign_ros2_control/IgnitionSystem</plugin>
+                </hardware>
+            </xacro:if>
+
+            <!-- ROS 2 Iron or above -->
+            <xacro:unless value="$(arg is_ignition)">
+                <hardware>
+                    <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+                </hardware>
+            </xacro:unless>
+        </xacro:if>
+
+        <!-- ros2_control Real Robot -->
+        <xacro:unless value="$(arg is_sim)">
+            <hardware>
+                <plugin>dynamixel_hardware_interface/DynamixelHardware</plugin>
+                <param name="port_name">$(arg port_name)</param>
+                <param name="baud_rate">$(arg baud_rate)</param>
+                <param name="error_timeout_ms">500</param>
+                <param name="dynamixel_model_folder">/param/dxl_model</param>
+                <param name="disable_torque_at_init">true</param>
+                <param name="number_of_joints">4</param>
+                <param name="number_of_transmissions">4</param>
+                <param name="dynamixel_state_pub_msg_name">dynamixel_hardware_interface/dxl_state</param>
+                <param name="get_dynamixel_data_srv_name">dynamixel_hardware_interface/get_dxl_data</param>
+                <param name="set_dynamixel_data_srv_name">dynamixel_hardware_interface/set_dxl_data</param>
+                <param name="reboot_dxl_srv_name">dynamixel_hardware_interface/reboot_dxl</param>
+                <param name="set_dxl_torque_srv_name">dynamixel_hardware_interface/set_dxl_torque</param>
+                <param name="transmission_to_joint_matrix">
+                    1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1
+                </param>
+                <param name="joint_to_transmission_matrix">
+                    1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1
+                </param>
+            </hardware>
+
+        </xacro:unless>
+        
+        <!-- ros2_control Common Interfaces -->
+
+        <joint name="wheel_front_left_joint">
+            <command_interface name="velocity">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+        
+        <joint name="wheel_front_right_joint">
+            <command_interface name="velocity">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <joint name="wheel_rear_left_joint">
+            <command_interface name="velocity">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <joint name="wheel_rear_right_joint">
+            <command_interface name="velocity">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <gpio name="dxl1">
+            <param name="type">dxl</param>
+            <param name="ID">$(arg dxl1_id)</param>
+            <command_interface name="Goal Velocity"/>
+            <state_interface name="Present Position"/>
+            <state_interface name="Present Velocity"/>
+        </gpio>
+
+        <gpio name="dxl2">
+            <param name="type">dxl</param>
+            <param name="ID">$(arg dxl2_id)</param>
+            <param name="Drive Mode">1</param>
+            <command_interface name="Goal Velocity"/>
+            <state_interface name="Present Position"/>
+            <state_interface name="Present Velocity"/>
+        </gpio>
+
+        <gpio name="dxl3">
+            <param name="type">dxl</param>
+            <param name="ID">$(arg dxl3_id)</param>
+            <command_interface name="Goal Velocity"/>
+            <state_interface name="Present Position"/>
+            <state_interface name="Present Velocity"/>
+        </gpio>
+
+        <gpio name="dxl4">
+            <param name="type">dxl</param>
+            <param name="ID">$(arg dxl4_id)</param>
+            <param name="Drive Mode">1</param> <!-- 0: Clockwise, 1: Counterclockwise -->
+            <command_interface name="Goal Velocity"/>
+            <state_interface name="Present Position"/>
+            <state_interface name="Present Velocity"/>
+        </gpio>
+
+    </ros2_control>
+
+</robot>
