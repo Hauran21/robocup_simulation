@@ -3,16 +3,18 @@
 
   <xacro:include filename="macros/tof.xacro"/>
 
-  <xacro:tof name="front_left_tof" parent="base_link" xyz="0.2 0 0.1" rpy="0 0 0"/>
-  <xacro:tof name="front_right_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
+  <!-- Maße vom base_link weg, der sich in der mitte des chassis befindet -->
 
-  <xacro:tof name="left_front_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
-  <xacro:tof name="left_rear_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
+  <xacro:tof name="front_left_tof" parent="base_link" xyz="0.045 0.0312 0.016" rpy="0 0 0"/>
+  <xacro:tof name="front_right_tof"  parent="base_link" xyz="0.045 -0.0312 0.016" rpy="0 0 0"/>
 
-  <xacro:tof name="right_front_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
-  <xacro:tof name="right_rear_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
+  <xacro:tof name="left_front_tof"  parent="base_link" xyz="0.0226 0.0325 0.03" rpy="0 0 0"/>
+  <xacro:tof name="left_rear_tof"  parent="base_link" xyz="-0.0465 0.02 0.03" rpy="0 0 0"/>
 
-  <xacro:tof name="rear_left_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
-  <xacro:tof name="rear_right_tof"  parent="base_link" xyz="-0.2 0 0.1" rpy="0 0 3.14"/>
+  <xacro:tof name="right_front_tof"  parent="base_link" xyz="0.0226 -0.0325 0.03" rpy="0 0 0"/>
+  <xacro:tof name="right_rear_tof"  parent="base_link" xyz="-0.0465 -0.02 0.034" rpy="0 0 0"/>
+
+  <xacro:tof name="rear_left_tof"  parent="base_link" xyz="-0.0765 0.046 -0.01914" rpy="0 0 0"/>
+  <xacro:tof name="rear_right_tof"  parent="base_link" xyz="-0.0765 -0.046 -0.01914" rpy="0 0 0"/>
 
 </robot>

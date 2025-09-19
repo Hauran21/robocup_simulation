@@ -1,0 +1,6 @@
+---
+string uart_name
+uint32 uart_baudrate
+uint8[] motor_ids
+float32 wheel_radius
+float32 wheel_separation

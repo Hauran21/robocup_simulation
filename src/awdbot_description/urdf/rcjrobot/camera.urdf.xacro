@@ -6,16 +6,16 @@
   <xacro:camera 
     name="left_camera" 
     parent="base_link" 
-    xyz="0.2 0 0.1" 
-    rpy="0 0 0"
+    xyz="-0.01 0.04 0.04" 
+    rpy="0 0 ${MATH_PI/2}"
     chassis_height="${chassis_height}"
   />
 
   <xacro:camera 
     name="right_camera" 
     parent="base_link" 
-    xyz="-0.2 0 0.1" 
-    rpy="0 0 3.14"
+    xyz="-0.01 -0.04 0.04" 
+    rpy="0 0 ${-MATH_PI/2}"
     chassis_height="${chassis_height}"
   />
 

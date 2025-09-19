@@ -13,7 +13,7 @@
         
         <link name="${name}">
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="${visual_rpy}" />
                 <geometry>
                     <mesh filename="file://$(find awdbot_description)/meshes/wheel.dae" scale="0.001 0.001 0.001" />
                 </geometry>
@@ -31,9 +31,9 @@
             </inertial>
         </link>
         
-        <joint name="${wheel_width}_joint" type="continuous">
-            <parent link="${wheel_width}_mount"/>
-            <child link="${wheel_width}"/>
+        <joint name="${name}_joint" type="continuous">
+            <parent link="${name}_mount"/>
+            <child link="${name}"/>
             <axis xyz="0 1 0"/>
             <origin xyz="0 0 0"/>
         </joint>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
     
     <xacro:include filename="macros/wheels.xacro"/>
     
@@ -8,7 +8,7 @@
         parent="base_link" 
         xyz="${wheel_mounting_offset_x} ${chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" 
         rpy="0 0 0"
-        visual_rpy="0 0 0"
+        visual_rpy="0 0 ${MATH_PI}"
         wheel_radius="${wheel_radius}"
         wheel_width="${wheel_width}"
     />
@@ -28,7 +28,7 @@
         parent="base_link" 
         xyz="${-wheel_mounting_offset_x} ${chassis_width / 2.0} ${-chassis_height / 2 + wheel_mounting_offset_z}" 
         rpy="0 0 0"
-        visual_rpy="0 0 0"
+        visual_rpy="0 0 ${MATH_PI}"
         wheel_radius="${wheel_radius}"
         wheel_width="${wheel_width}"
     />

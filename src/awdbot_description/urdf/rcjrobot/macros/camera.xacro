@@ -6,9 +6,9 @@
         <xacro:property name="camera_height" value="0.006"/>
         <xacro:property name="camera_diameter" value="0.004"/>
 
-        <xacro:property name="camera_link" value="${name}_camera_link"/>
-        <xacro:property name="camera_name" value="${name}_camera"/>
-        <xacro:property name="camera_topic" value="/${name}_camera/image_raw"/>
+        <xacro:property name="camera_link" value="${name}_link"/>
+        <xacro:property name="camera_name" value="${name}"/>
+        <xacro:property name="camera_topic" value="/${name}/image_raw"/>
         <xacro:property name="update_rate" value="10.0"/> <!--[Hz]-->
         <xacro:property name="visualize" value="1"/>
         <xacro:property name="horizontal_fov" value="1.21126"/>
@@ -20,48 +20,46 @@
         <xacro:property name="noise_stddev" value="0.007"/>
 
         <!-- Add camera_mount -->
-        <link name="${camera_link}_mount_link">
+        <link name="${name}_mount_link">
             <visual>
-                <origin xyz="0 0 ${camera_diameter / 2.0}" rpy="0 ${MATH_PI / 2.0} 0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <cylinder length="${camera_height}" radius="${camera_diameter / 2.0}"/>
                 </geometry>
                 <material name="green"/>
             </visual>
             <collision>
-                <origin xyz="0 0 ${camera_diameter / 2.0}" rpy="0 ${MATH_PI / 2.0} 0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <cylinder length="${camera_height}" radius="${camera_diameter / 2.0}"/>
                 </geometry>
             </collision>
             <inertial>
                 <mass value="0.01" />
-                <origin xyz="0 0 ${camera_diameter / 2.0}" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <xacro:cylinder_inertia m="0.01" r="${camera_diameter / 2.0}" h="${camera_height}" />
             </inertial>
         </link>
 
-        <joint name="${camera_link}_mount_link_joint" type="fixed" >
-            <origin xyz="0.03 0 ${chassis_height / 2.0 - 0.02}" rpy="0 0 0" />
+        <joint name="${name}_mount_link_joint" type="fixed" >
+            <origin xyz="${xyz}" rpy="${rpy}" />
             <parent link="base_link"/>
-            <child link="${camera_link}_mount_link" />
+            <child link="${name}_mount_link" />
         </joint>
 
-
-        <!-- Add camera_link -->
-        <link name="${camera_link}">
+        <!-- Add name -->
+        <link name="${name}">
         </link>
 
-        <joint name="${camera_link}_joint" type="fixed" >
-            <origin xyz="0 0 ${camera_diameter / 2.0}" rpy="0 0 0" />
-            <parent link="${camera_link}_mount_link"/>
-            <child link="${camera_link}" />
+        <joint name="${name}_joint" type="fixed" >
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <parent link="${name}_mount_link"/>
+            <child link="${name}" />
         </joint>
 
-
-        <gazebo reference="${camera_link}">
+        <gazebo reference="${name}">
             <sensor name="${camera_name}" type="camera">
-                <pose relative_to='${camera_link}'>0 0 0 0 0 0</pose>
+                <pose relative_to='${name}'>0 0 0 0 0 0</pose>
                 <always_on>1</always_on>
                 <update_rate>${update_rate}</update_rate>
                 <visualize>${visualize}</visualize>
@@ -86,6 +84,5 @@
                 </camera>
             </sensor>
         </gazebo>
-
     </xacro:macro>
 </robot>

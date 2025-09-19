@@ -27,29 +27,34 @@
   direction: GZ_TO_ROS
 
 # gz topic 2D lidar
-- ros_topic_name: "/scan"
-  gz_topic_name: "/scan"
-  ros_type_name: "sensor_msgs/msg/LaserScan"
-  gz_type_name: "gz.msgs.LaserScan"
-  direction: GZ_TO_ROS
+#- ros_topic_name: "/scan"
+#  gz_topic_name: "/scan"
+#  ros_type_name: "sensor_msgs/msg/LaserScan"
+#  gz_type_name: "gz.msgs.LaserScan"
+#  direction: GZ_TO_ROS
 
-# gz topic tof-2d-lidar
-- ros_topic_name: "/tof_scan"
-  gz_topic_name: "/tof_scan"
-  ros_type_name: "sensor_msgs/msg/LaserScan"
-  gz_type_name: "gz.msgs.LaserScan"
-  direction: GZ_TO_ROS
-
-# gz topic camera/image_raw
-- ros_topic_name: "/camera/image_raw"
-  gz_topic_name: "/camera/image_raw"
+# camera left
+- ros_topic_name: "/left_camera/image_raw"
+  gz_topic_name: "/left_camera/image_raw"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "ignition.msgs.Image"
   direction: GZ_TO_ROS
 
-# gz topic camera/camera_info
-- ros_topic_name: "/camera/camera_info"
-  gz_topic_name: "/camera/camera_info"
+- ros_topic_name: "/left_camera/camera_info"
+  gz_topic_name: "/left_camera/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "ignition.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+# camera right
+- ros_topic_name: "/right_camera/image_raw"
+  gz_topic_name: "/right_camera/image_raw"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "ignition.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/right_camera/camera_info"
+  gz_topic_name: "/right_camera/camera_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "ignition.msgs.CameraInfo"
   direction: GZ_TO_ROS
@@ -61,4 +66,51 @@
   gz_type_name: "ignition.msgs.Twist"
   direction: ROS_TO_GZ
 
+# TOF sensoren
+- ros_topic_name: "/front_left_tof_scan"
+  gz_topic_name: "/front_left_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
 
+- ros_topic_name: "/front_right_tof_scan"
+  gz_topic_name: "/front_right_tof_scan"  
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/left_front_center_tof_scan"
+  gz_topic_name: "/left_front_center_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/left_rear_center_tof_scan"
+  gz_topic_name: "/left_rear_center_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/right_front_center_tof_scan"
+  gz_topic_name: "/right_front_center_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/right_rear_center_tof_scan"
+  gz_topic_name: "/right_rear_center_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/rear_left_tof_scan"
+  gz_topic_name: "/rear_left_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/rear_right_tof_scan"
+  gz_topic_name: "/rear_right_tof_scan"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS

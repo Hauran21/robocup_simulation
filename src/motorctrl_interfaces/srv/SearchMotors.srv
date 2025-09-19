@@ -1,0 +1,5 @@
+char[] uart_port    # UART port for motor communication
+uint32 baudrate     # baudrate for motor communication
+---
+uint8[] motor_ids   # found motor IDs
+bool status                 

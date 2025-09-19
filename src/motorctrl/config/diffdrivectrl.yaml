@@ -1,0 +1,11 @@
+diffdrivectrl:
+  ros__parameters:
+    motor_ids:
+    - 1
+    - 2
+    - 3
+    - 4
+    uart_baudrate: 57600
+    uart_name: /dev/ttyACM0
+    wheel_radius: 0.04
+    wheel_separation: 0.18

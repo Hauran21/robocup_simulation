@@ -47,7 +47,7 @@
   <!-- <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/lidar.urdf.xacro" /> -->
 
   <!-- Add tof -->
-  <!-- <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/tof.urdf.xacro" /> -->
+  <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/tof.urdf.xacro" /> 
 
   <!-- Add camera -->
   <xacro:include filename="$(find awdbot_description)/urdf/rcjrobot/camera.urdf.xacro" />

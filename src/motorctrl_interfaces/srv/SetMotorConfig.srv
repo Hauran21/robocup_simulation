@@ -1,0 +1,8 @@
+uint8 motor_id
+string uart_name
+uint32 uart_baudrate
+uint8 motor_id_new
+uint32 uart_baudrate_new
+---
+bool success
+string message
